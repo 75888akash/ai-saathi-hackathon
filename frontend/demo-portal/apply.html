@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html lang="hi">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>आवेदन करें | Apply</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <div class="top-bar">🇮🇳 भारत सरकार | Government of India 🇮🇳</div>
+
+  <header class="header">
+    <div class="header-left">
+      <div class="emblem">🇮🇳</div>
+      <div class="header-title">
+        <h1 data-hi="सरकारी योजना पोर्टल" data-en="Government Schemes Portal">सरकारी योजना पोर्टल</h1>
+        <p>Government Schemes Portal - Digital India</p>
+      </div>
+    </div>
+    <div style="display:flex;gap:10px;align-items:center;">
+      <button class="lang-toggle" onclick="toggleLanguage()" style="background:white;color:#1e3a8a;padding:8px 15px;border:2px solid white;border-radius:20px;cursor:pointer;font-weight:600;font-size:13px;">🌐 English</button>
+      <button class="btn-login" onclick="location.href='login.html'" data-hi="लॉगिन | Login" data-en="Login">लॉगिन | Login</button>
+    </div>
+  </header>
+
+  <nav class="nav">
+    <a href="index.html" data-hi="🏠 होम" data-en="🏠 Home">🏠 होम</a>
+    <a href="schemes.html" data-hi="📋 योजनाएं" data-en="📋 Schemes">📋 योजनाएं</a>
+    <a href="apply.html" class="active" data-hi="📝 आवेदन करें" data-en="📝 Apply">📝 आवेदन करें</a>
+    <a href="status.html" data-hi="🔍 स्थिति जांचें" data-en="🔍 Check Status">🔍 स्थिति जांचें</a>
+    <a href="contact.html" data-hi="📞 संपर्क" data-en="📞 Contact">📞 संपर्क</a>
+    <a href="about.html" data-hi="ℹ️ हमारे बारे में" data-en="ℹ️ About">ℹ️ हमारे बारे में</a>
+  </nav>
+
+  <div class="container" style="margin-top:50px; margin-bottom:50px;">
+    <div class="form-container">
+      <h2 style="text-align:center; color:#1e3a8a; margin-bottom:10px;" data-hi="📝 योजना के लिए आवेदन करें" data-en="📝 Apply for Government Scheme">📝 योजना के लिए आवेदन करें</h2>
+      <p style="text-align:center; color:#666; margin-bottom:30px;">Apply for Government Scheme</p>
+      
+      <form onsubmit="handleApply(event)">
+        <div class="form-group">
+          <label data-hi="योजना चुनें / Select Scheme *" data-en="Select Scheme *">योजना चुनें / Select Scheme *</label>
+          <select required>
+            <option value="" data-hi="-- योजना चुनें --" data-en="-- Select Scheme --">-- योजना चुनें --</option>
+            <option data-hi="प्रधानमंत्री आवास योजना" data-en="PM Housing Scheme">प्रधानमंत्री आवास योजना</option>
+            <option data-hi="जन धन योजना" data-en="Jan Dhan Yojana">जन धन योजना</option>
+            <option data-hi="किसान सम्मान निधि" data-en="Kisan Samman Nidhi">किसान सम्मान निधि</option>
+            <option data-hi="उज्ज्वला योजना" data-en="Ujjwala Yojana">उज्ज्वला योजना</option>
+            <option data-hi="आयुष्मान भारत" data-en="Ayushman Bharat">आयुष्मान भारत</option>
+            <option data-hi="बेटी बचाओ बेटी पढ़ाओ" data-en="Beti Bachao Beti Padhao">बेटी बचाओ बेटी पढ़ाओ</option>
+          </select>
+        </div>
+
+        <div class="form-group">
+          <label data-hi="पूरा नाम / Full Name *" data-en="Full Name *">पूरा नाम / Full Name *</label>
+          <input type="text" placeholder="अपना पूरा नाम लिखें" required>
+        </div>
+
+        <div class="form-group">
+          <label data-hi="आधार नंबर / Aadhaar Number *" data-en="Aadhaar Number *">आधार नंबर / Aadhaar Number *</label>
+          <input type="text" placeholder="1234 5678 9012" maxlength="12" required>
+        </div>
+
+        <div class="form-group">
+          <label data-hi="मोबाइल नंबर / Mobile Number *" data-en="Mobile Number *">मोबाइल नंबर / Mobile Number *</label>
+          <input type="tel" placeholder="+91 98765 43210" maxlength="10" required>
+        </div>
+
+        <div class="form-group">
+          <label data-hi="ईमेल / Email" data-en="Email">ईमेल / Email</label>
+          <input type="email" placeholder="example@email.com">
+        </div>
+
+        <div class="form-group">
+          <label data-hi="राज्य / State *" data-en="State *">राज्य / State *</label>
+          <select required>
+            <option value="" data-hi="-- राज्य चुनें --" data-en="-- Select State --">-- राज्य चुनें --</option>
+            <option data-hi="महाराष्ट्र" data-en="Maharashtra">महाराष्ट्र</option>
+            <option data-hi="उत्तर प्रदेश" data-en="Uttar Pradesh">उत्तर प्रदेश</option>
+            <option data-hi="बिहार" data-en="Bihar">बिहार</option>
+            <option data-hi="पश्चिम बंगाल" data-en="West Bengal">पश्चिम बंगाल</option>
+            <option data-hi="मध्य प्रदेश" data-en="Madhya Pradesh">मध्य प्रदेश</option>
+            <option data-hi="तमिलनाडु" data-en="Tamil Nadu">तमिलनाडु</option>
+            <option data-hi="राजस्थान" data-en="Rajasthan">राजस्थान</option>
+            <option data-hi="कर्नाटक" data-en="Karnataka">कर्नाटक</option>
+            <option data-hi="गुजरात" data-en="Gujarat">गुजरात</option>
+            <option data-hi="अन्य" data-en="Other">अन्य</option>
+          </select>
+        </div>
+
+        <div class="form-group">
+          <label data-hi="पता / Address *" data-en="Address *">पता / Address *</label>
+          <textarea rows="3" placeholder="अपना पूरा पता लिखें" required></textarea>
+        </div>
+
+        <div class="form-group">
+          <button type="submit" class="btn" style="margin-top:15px;" data-hi="आवेदन जमा करें | Submit Application" data-en="Submit Application">आवेदन जमा करें | Submit Application</button>
+        </div>
+      </form>
+    </div>
+  </div>
+
+  <footer class="footer">
+    <p>© 2026 भारत सरकार | Government of India</p>
+    <p>Powered by Digital India Initiative | AI Saathi</p>
+  </footer>
+
+  <div class="ai-badge">🤖 AI Saathi Active</div>
+  <script src="lang-toggle.js"></script>
+  <script src="chatbot.js"></script>
+  <script>
+    function handleApply(e) {
+      e.preventDefault();
+      alert('आपका आवेदन सफलतापूर्वक जमा हो गया है!\nYour application has been submitted successfully!\n\nआवेदन संख्या: APP' + Math.floor(Math.random() * 1000000));
+      e.target.reset();
+    }
+  </script>
+</body>
+</html>

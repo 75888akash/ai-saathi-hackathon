@@ -1,0 +1,56 @@
+{
+  "project": "AI Saathi - Government Scheme Information Assistant",
+  "region": "ap-south-1",
+  "account_id": "746669191484",
+  "resources": {
+    "lambda_functions": [
+      {
+        "name": "ai-saathi-api",
+        "runtime": "python3.12",
+        "handler": "lambda_function.lambda_handler",
+        "memory": 256,
+        "timeout": 30,
+        "description": "Main API for question answering using Bedrock Knowledge Base"
+      },
+      {
+        "name": "ai-saathi-audio",
+        "runtime": "python3.12",
+        "handler": "lambda_function.lambda_handler",
+        "memory": 512,
+        "timeout": 30,
+        "description": "Audio generation using Amazon Polly with S3 caching"
+      }
+    ],
+    "api_gateway": {
+      "type": "HTTP API",
+      "api_id": "jg30c7c6r7",
+      "endpoint": "https://jg30c7c6r7.execute-api.ap-south-1.amazonaws.com/prod",
+      "routes": ["/ask", "/audio"]
+    },
+    "s3_buckets": [
+      "ai-saathi-knowledge-docs",
+      "bedrock-knowledge-base-0xjz1f",
+      "ai-saathi-audio-cache",
+      "ai-saathi-web-akash",
+      "ai-saathi-demo-portal"
+    ],
+    "dynamodb_tables": [
+      "ai-saathi-answer-cache",
+      "ai-saathi-conversations"
+    ],
+    "bedrock": {
+      "knowledge_base_id": "1VKMSXXJKH",
+      "model": "apac.amazon.nova-micro-v1:0"
+    },
+    "cloudfront": [
+      {
+        "id": "EPBY76Z26CA8D",
+        "domain": "ai-saathi.techietech.shop"
+      },
+      {
+        "id": "EWR0A4PSPJ32G",
+        "domain": "demo.techietech.shop"
+      }
+    ]
+  }
+}

@@ -1,0 +1,377 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>AI Saathi - आपका सहायक</title>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate">
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    body {
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+      min-height: 100vh;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      padding: 20px;
+    }
+    .container {
+      background: white;
+      border-radius: 30px;
+      box-shadow: 0 20px 60px rgba(0,0,0,0.3);
+      max-width: 500px;
+      width: 100%;
+      overflow: hidden;
+    }
+    .header {
+      background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+      color: white;
+      padding: 30px;
+      text-align: center;
+    }
+    .header h1 { font-size: 28px; margin-bottom: 5px; }
+    .header p { font-size: 14px; opacity: 0.9; }
+    .chat-area {
+      padding: 30px;
+      min-height: 300px;
+      max-height: 400px;
+      overflow-y: auto;
+    }
+    .message {
+      background: #f0f0f0;
+      padding: 20px;
+      border-radius: 20px;
+      margin-bottom: 15px;
+      font-size: 18px;
+      line-height: 1.6;
+      animation: fadeIn 0.3s;
+    }
+    .listen-btn {
+      background: linear-gradient(135deg, #4caf50 0%, #45a049 100%);
+      color: white;
+      border: none;
+      padding: 8px 16px;
+      border-radius: 20px;
+      cursor: pointer;
+      font-size: 14px;
+      font-weight: 600;
+      margin-top: 10px;
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      transition: all 0.3s;
+    }
+    .listen-btn:hover { transform: translateY(-2px); box-shadow: 0 4px 12px rgba(76, 175, 80, 0.4); }
+    .listen-btn.playing { background: linear-gradient(135deg, #ff6b6b 0%, #ee5a6f 100%); animation: pulse 1.5s infinite; }
+    @keyframes fadeIn { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
+    @keyframes pulse { 0%, 100% { transform: scale(1); } 50% { transform: scale(1.05); } }
+    .message.thinking { background: #e3f2fd; color: #1976d2; text-align: center; font-weight: 500; }
+    .message.listening { background: #fff3e0; color: #f57c00; text-align: center; font-weight: 500; }
+    .empty-state { text-align: center; color: #999; padding: 40px 20px; }
+    .empty-state .icon { font-size: 60px; margin-bottom: 15px; }
+    .controls { padding: 20px 30px 30px; background: #fafafa; }
+    .lang-selector { margin-bottom: 15px; }
+    .lang-selector select {
+      width: 100%;
+      padding: 15px;
+      font-size: 16px;
+      border: 2px solid #ddd;
+      border-radius: 15px;
+      background: white;
+      cursor: pointer;
+      transition: all 0.3s;
+    }
+    .lang-selector select:focus { outline: none; border-color: #667eea; }
+    .input-area { display: flex; gap: 10px; margin-bottom: 15px; }
+    #q {
+      flex: 1;
+      padding: 15px 20px;
+      font-size: 16px;
+      border: 2px solid #ddd;
+      border-radius: 15px;
+      transition: all 0.3s;
+    }
+    #q:focus { outline: none; border-color: #667eea; }
+    .btn-group { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; }
+    .control-btns { margin-top: 10px; }
+    button {
+      padding: 18px;
+      font-size: 18px;
+      border: none;
+      border-radius: 15px;
+      cursor: pointer;
+      font-weight: 600;
+      transition: all 0.3s;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+    }
+    .ask-btn { background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); color: white; }
+    .ask-btn:hover { transform: translateY(-2px); box-shadow: 0 5px 15px rgba(102, 126, 234, 0.4); }
+    .mic-btn { background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%); color: white; }
+    .mic-btn:hover { transform: translateY(-2px); box-shadow: 0 5px 15px rgba(245, 87, 108, 0.4); }
+    .mic-btn.listening { animation: pulse 1.5s infinite; }
+    .stop-btn { background: linear-gradient(135deg, #ff6b6b 0%, #ee5a6f 100%); color: white; width: 100%; }
+    .stop-btn:hover { transform: translateY(-2px); box-shadow: 0 5px 15px rgba(255, 107, 107, 0.4); }
+    button:active { transform: scale(0.98); }
+    .detected-lang { text-align: center; font-size: 12px; color: #666; margin-top: 10px; }
+    @media (max-width: 600px) {
+      .header h1 { font-size: 24px; }
+      .message { font-size: 16px; }
+      button { font-size: 16px; padding: 15px; }
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <div class="header">
+      <h1>🤖 AI Saathi</h1>
+      <p>आपका डिजिटल सहायक | Your Digital Assistant</p>
+    </div>
+    <div class="chat-area" id="chat-area">
+      <div class="empty-state">
+        <div class="icon">👋</div>
+        <p>नमस्ते! मैं आपकी मदद के लिए यहाँ हूँ</p>
+        <p>Hello! I'm here to help you</p>
+      </div>
+    </div>
+    <div class="controls">
+      <div class="lang-selector">
+        <select id="lang">
+          <option value="hi-IN">🇮🇳 हिंदी (Hindi)</option>
+          <option value="en-IN">🇬🇧 English</option>
+        </select>
+      </div>
+      <div class="input-area">
+        <input type="text" id="q" placeholder="Type your question...">
+      </div>
+      <div class="btn-group">
+        <button class="ask-btn" onclick="ask()"><span>💬</span><span>पूछें | Ask</span></button>
+        <button class="mic-btn" id="mic-btn" onclick="startVoice()"><span>🎙️</span><span>बोलें | Speak</span></button>
+      </div>
+      <div class="control-btns">
+        <button class="stop-btn" onclick="stopAll()"><span>⏹️</span><span>रोकें | Stop</span></button>
+      </div>
+      <div class="detected-lang" id="detected-lang"></div>
+    </div>
+  </div>
+
+<script>
+const textApiUrl = "https://jg30c7c6r7.execute-api.ap-south-1.amazonaws.com/prod/ask";
+const audioApiUrl = "https://jg30c7c6r7.execute-api.ap-south-1.amazonaws.com/prod/audio";
+
+let audioPlayer = null;
+let recognition = null;
+
+async function ask(autoPlayAudio = false){
+  const qEl = document.getElementById("q");
+  const langEl = document.getElementById("lang");
+  const chatArea = document.getElementById("chat-area");
+
+  if (!qEl) return;
+  const q = qEl.value.trim();
+  if (!q) return;
+
+  const selectedLang = langEl ? langEl.value.split("-")[0] : "hi";
+
+  stopAll();
+  const thinkingMsg = selectedLang === "en" ? "🤔 Thinking..." : "🤔 सोच रहा हूँ... Thinking...";
+  chatArea.innerHTML = `<div class="message thinking">${thinkingMsg}</div>`;
+  document.getElementById("detected-lang").innerText = "";
+
+  try{
+    const res = await fetch(textApiUrl,{
+      method:"POST",
+      headers:{"Content-Type":"application/json"},
+      body: JSON.stringify({question:q, language: selectedLang})
+    });
+
+    if(!res.ok) throw new Error("API error: " + res.status);
+    const data = await res.json();
+    
+    let messageHTML = `<div class="message">${data.answer || "No answer received"}`;
+    messageHTML += `<br><button class="listen-btn" onclick="fetchAudio(this, '${selectedLang}')"><span>🔊</span><span>सुनें | Listen</span></button>`;
+    messageHTML += `</div>`;
+    chatArea.innerHTML = messageHTML;
+    
+    if(data.detected_language){
+      const langName = data.detected_language === 'en' ? 'English' : 'हिंदी';
+      document.getElementById("detected-lang").innerText = `भाषा | Language: ${langName}`;
+    }
+    
+    qEl.value = "";
+    
+    if(autoPlayAudio){
+      setTimeout(() => {
+        const listenBtn = chatArea.querySelector('.listen-btn');
+        if(listenBtn) listenBtn.click();
+      }, 100);
+    }
+
+  }catch(e){
+    chatArea.innerHTML = `<div class="message" style="background:#ffebee;color:#c62828;">❌ Error: ${e.message}</div>`;
+  }
+}
+
+async function fetchAudio(btnElement, language){
+  if(audioPlayer && !audioPlayer.paused){
+    stopAudio();
+    return;
+  }
+  
+  // Get the text from the message div
+  const messageDiv = btnElement.closest('.message');
+  const text = messageDiv.textContent.replace(/सुनें \| Listen/g, '').trim();
+  
+  btnElement.innerHTML = '<span>⏳</span><span>Loading...</span>';
+  btnElement.disabled = true;
+  
+  try{
+    const res = await fetch(audioApiUrl, {
+      method: "POST",
+      headers: {"Content-Type": "application/json"},
+      body: JSON.stringify({text: text, language: language})
+    });
+    
+    if(!res.ok) throw new Error("Audio API error");
+    const data = await res.json();
+    
+    if(data.audio){
+      playAudio(data.audio, btnElement);
+    }
+  }catch(e){
+    btnElement.innerHTML = '<span>❌</span><span>Error</span>';
+    setTimeout(() => {
+      btnElement.innerHTML = '<span>🔊</span><span>सुनें | Listen</span>';
+      btnElement.disabled = false;
+    }, 2000);
+  }
+}
+
+function playAudio(base64, btnElement){
+  stopAudio();
+  const src = "data:audio/mp3;base64," + base64;
+  audioPlayer = new Audio(src);
+  
+  if(btnElement){
+    btnElement.innerHTML = '<span>⏸️</span><span>रोकें | Stop</span>';
+    btnElement.classList.add('playing');
+    btnElement.disabled = false;
+  }
+  
+  audioPlayer.play();
+  
+  audioPlayer.onended = () => {
+    if(btnElement){
+      btnElement.innerHTML = '<span>🔊</span><span>सुनें | Listen</span>';
+      btnElement.classList.remove('playing');
+    }
+    audioPlayer = null;
+  };
+}
+
+function stopAudio(){
+  if (audioPlayer){
+    audioPlayer.pause();
+    audioPlayer.currentTime = 0;
+    audioPlayer = null;
+  }
+  document.querySelectorAll('.listen-btn').forEach(btn => {
+    btn.innerHTML = '<span>🔊</span><span>सुनें | Listen</span>';
+    btn.classList.remove('playing');
+    btn.disabled = false;
+  });
+}
+
+function startVoice(){
+  stopAll();
+
+  const SpeechRecognition = window.SpeechRecognition || window.webkitSpeechRecognition;
+  if (!SpeechRecognition){
+    alert("आपका ब्राउज़र वॉइस को सपोर्ट नहीं करता | Voice not supported");
+    return;
+  }
+
+  const langEl = document.getElementById("lang");
+  const chatArea = document.getElementById("chat-area");
+  const micBtn = document.getElementById("mic-btn");
+  const selectedLang = langEl ? langEl.value : "hi-IN";
+
+  recognition = new SpeechRecognition();
+  recognition.lang = selectedLang;
+  recognition.continuous = false;
+  recognition.interimResults = false;
+
+  recognition.start();
+  const listeningMsg = selectedLang === "hi-IN" ? "🎤 सुन रहा हूँ... Listening..." : "🎤 Listening...";
+  chatArea.innerHTML = `<div class="message listening">${listeningMsg}</div>`;
+  micBtn.classList.add('listening');
+
+  recognition.onresult = function(event){
+    const text = event.results[0][0].transcript;
+    document.getElementById("q").value = text;
+    recognition.stop();
+    micBtn.classList.remove('listening');
+    ask(true);
+  };
+
+  recognition.onend = function(){ 
+    recognition = null;
+    micBtn.classList.remove('listening');
+  };
+  
+  recognition.onerror = function(e){ 
+    recognition = null;
+    micBtn.classList.remove('listening');
+    if(e.error !== 'no-speech'){
+      chatArea.innerHTML = `<div class="message" style="background:#ffebee;color:#c62828;">❌ Voice error: ${e.error}</div>`;
+    }
+  };
+}
+
+function stopVoice(){
+  if (recognition){
+    recognition.stop();
+    recognition = null;
+  }
+}
+
+function stopAll(){
+  stopAudio();
+  stopVoice();
+  const micBtn = document.getElementById("mic-btn");
+  if(micBtn) micBtn.classList.remove('listening');
+}
+
+function updatePlaceholder(){
+  const langEl = document.getElementById("lang");
+  const qEl = document.getElementById("q");
+  if(langEl && qEl){
+    qEl.placeholder = langEl.value === "en-IN" ? "Type your question..." : "अपना सवाल लिखें...";
+  }
+}
+
+document.addEventListener("DOMContentLoaded", function(){
+  const langEl = document.getElementById("lang");
+  const qEl = document.getElementById("q");
+  
+  if(langEl){
+    langEl.addEventListener("change", function(){
+      stopAll();
+      updatePlaceholder();
+    });
+  }
+  
+  if(qEl){
+    qEl.addEventListener("keypress", function(e){
+      if(e.key === "Enter") ask();
+    });
+  }
+  
+  updatePlaceholder();
+});
+</script>
+</body>
+</html>

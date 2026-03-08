@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="hi">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>सरकारी योजनाएं | Government Schemes</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <div class="top-bar">🇮🇳 भारत सरकार | Government of India 🇮🇳</div>
+
+  <header class="header">
+    <div class="header-left">
+      <div class="emblem">🇮🇳</div>
+      <div class="header-title">
+        <h1 data-hi="सरकारी योजना पोर्टल" data-en="Government Schemes Portal">सरकारी योजना पोर्टल</h1>
+        <p>Government Schemes Portal - Digital India</p>
+      </div>
+    </div>
+    <div style="display:flex;gap:10px;align-items:center;">
+      <button class="lang-toggle" onclick="toggleLanguage()" style="background:white;color:#1e3a8a;padding:8px 15px;border:2px solid white;border-radius:20px;cursor:pointer;font-weight:600;font-size:13px;">🌐 English</button>
+      <button class="btn-login" onclick="location.href='login.html'" data-hi="लॉगिन | Login" data-en="Login">लॉगिन | Login</button>
+    </div>
+  </header>
+
+  <nav class="nav">
+    <a href="index.html" data-hi="🏠 होम" data-en="🏠 Home">🏠 होम</a>
+    <a href="schemes.html" class="active" data-hi="📋 योजनाएं" data-en="📋 Schemes">📋 योजनाएं</a>
+    <a href="apply.html" data-hi="📝 आवेदन करें" data-en="📝 Apply">📝 आवेदन करें</a>
+    <a href="status.html" data-hi="🔍 स्थिति जांचें" data-en="🔍 Check Status">🔍 स्थिति जांचें</a>
+    <a href="contact.html" data-hi="📞 संपर्क" data-en="📞 Contact">📞 संपर्क</a>
+    <a href="about.html" data-hi="ℹ️ हमारे बारे में" data-en="ℹ️ About">ℹ️ हमारे बारे में</a>
+  </nav>
+
+  <div class="container" style="margin-top:40px;">
+    <h2 class="section-title" data-hi="📋 सभी सरकारी योजनाएं" data-en="📋 All Government Schemes">📋 सभी सरकारी योजनाएं</h2>
+    
+    <div class="schemes-grid">
+      <div class="scheme-card">
+        <div class="scheme-icon">🏠</div>
+        <h3 data-hi="प्रधानमंत्री आवास योजना" data-en="PM Housing Scheme">प्रधानमंत्री आवास योजना</h3>
+        <p data-hi="सभी के लिए किफायती आवास। शहरी और ग्रामीण क्षेत्रों में घर बनाने के लिए सब्सिडी।" data-en="Affordable housing for all. Subsidy for building homes in urban and rural areas.">सभी के लिए किफायती आवास। शहरी और ग्रामीण क्षेत्रों में घर बनाने के लिए सब्सिडी।</p>
+        <button class="btn" onclick="location.href='apply.html'" data-hi="आवेदन करें" data-en="Apply Now">आवेदन करें</button>
+      </div>
+
+      <div class="scheme-card">
+        <div class="scheme-icon">💰</div>
+        <h3 data-hi="जन धन योजना" data-en="Jan Dhan Yojana">जन धन योजना</h3>
+        <p data-hi="सभी के लिए बैंक खाता। जीरो बैलेंस खाता, रुपे कार्ड और बीमा कवर।" data-en="Bank account for all. Zero balance account, RuPay card and insurance cover.">सभी के लिए बैंक खाता। जीरो बैलेंस खाता, रुपे कार्ड और बीमा कवर।</p>
+        <button class="btn" onclick="location.href='apply.html'" data-hi="आवेदन करें" data-en="Apply Now">आवेदन करें</button>
+      </div>
+
+      <div class="scheme-card">
+        <div class="scheme-icon">🌾</div>
+        <h3 data-hi="किसान सम्मान निधि" data-en="Kisan Samman Nidhi">किसान सम्मान निधि</h3>
+        <p data-hi="किसानों को ₹6000 प्रति वर्ष सीधे बैंक खाते में। तीन किस्तों में भुगतान।" data-en="₹6000 per year directly to farmers' bank accounts. Payment in three installments.">किसानों को ₹6000 प्रति वर्ष सीधे बैंक खाते में। तीन किस्तों में भुगतान।</p>
+        <button class="btn" onclick="location.href='apply.html'" data-hi="आवेदन करें" data-en="Apply Now">आवेदन करें</button>
+      </div>
+
+      <div class="scheme-card">
+        <div class="scheme-icon">⚡</div>
+        <h3 data-hi="उज्ज्वला योजना" data-en="Ujjwala Yojana">उज्ज्वला योजना</h3>
+        <p data-hi="गरीब परिवारों को मुफ्त LPG कनेक्शन। स्वच्छ ईंधन के लिए सब्सिडी।" data-en="Free LPG connection to poor families. Subsidy for clean fuel.">गरीब परिवारों को मुफ्त LPG कनेक्शन। स्वच्छ ईंधन के लिए सब्सिडी।</p>
+        <button class="btn" onclick="location.href='apply.html'" data-hi="आवेदन करें" data-en="Apply Now">आवेदन करें</button>
+      </div>
+
+      <div class="scheme-card">
+        <div class="scheme-icon">🏥</div>
+        <h3 data-hi="आयुष्मान भारत" data-en="Ayushman Bharat">आयुष्मान भारत</h3>
+        <p data-hi="₹5 लाख तक का मुफ्त स्वास्थ्य बीमा। गरीब परिवारों के लिए कैशलेस इलाज।" data-en="Free health insurance up to ₹5 lakh. Cashless treatment for poor families.">₹5 लाख तक का मुफ्त स्वास्थ्य बीमा। गरीब परिवारों के लिए कैशलेस इलाज।</p>
+        <button class="btn" onclick="location.href='apply.html'" data-hi="आवेदन करें" data-en="Apply Now">आवेदन करें</button>
+      </div>
+
+      <div class="scheme-card">
+        <div class="scheme-icon">👧</div>
+        <h3 data-hi="बेटी बचाओ बेटी पढ़ाओ" data-en="Beti Bachao Beti Padhao">बेटी बचाओ बेटी पढ़ाओ</h3>
+        <p data-hi="बालिकाओं की शिक्षा और सुरक्षा। लिंग अनुपात सुधार के लिए योजना।" data-en="Education and safety of girls. Scheme to improve gender ratio.">बालिकाओं की शिक्षा और सुरक्षा। लिंग अनुपात सुधार के लिए योजना।</p>
+        <button class="btn" onclick="location.href='apply.html'" data-hi="आवेदन करें" data-en="Apply Now">आवेदन करें</button>
+      </div>
+
+      <div class="scheme-card">
+        <div class="scheme-icon">🎓</div>
+        <h3 data-hi="स्वच्छ भारत मिशन" data-en="Swachh Bharat Mission">स्वच्छ भारत मिशन</h3>
+        <p data-hi="स्वच्छता अभियान। शौचालय निर्माण के लिए सहायता और प्रोत्साहन।" data-en="Cleanliness campaign. Assistance and incentives for toilet construction.">स्वच्छता अभियान। शौचालय निर्माण के लिए सहायता और प्रोत्साहन।</p>
+        <button class="btn" onclick="location.href='apply.html'" data-hi="आवेदन करें" data-en="Apply Now">आवेदन करें</button>
+      </div>
+
+      <div class="scheme-card">
+        <div class="scheme-icon">💡</div>
+        <h3 data-hi="सौभाग्य योजना" data-en="Saubhagya Yojana">सौभाग्य योजना</h3>
+        <p data-hi="सभी घरों में बिजली। मुफ्त बिजली कनेक्शन और सब्सिडी।" data-en="Electricity in all homes. Free electricity connection and subsidy.">सभी घरों में बिजली। मुफ्त बिजली कनेक्शन और सब्सिडी।</p>
+        <button class="btn" onclick="location.href='apply.html'" data-hi="आवेदन करें" data-en="Apply Now">आवेदन करें</button>
+      </div>
+
+      <div class="scheme-card">
+        <div class="scheme-icon">🚰</div>
+        <h3 data-hi="जल जीवन मिशन" data-en="Jal Jeevan Mission">जल जीवन मिशन</h3>
+        <p data-hi="हर घर में नल से जल। स्वच्छ पेयजल की सुविधा सभी के लिए।" data-en="Tap water in every home. Clean drinking water facility for all.">हर घर में नल से जल। स्वच्छ पेयजल की सुविधा सभी के लिए।</p>
+        <button class="btn" onclick="location.href='apply.html'" data-hi="आवेदन करें" data-en="Apply Now">आवेदन करें</button>
+      </div>
+    </div>
+  </div>
+
+  <footer class="footer">
+    <p>© 2026 भारत सरकार | Government of India</p>
+    <p>Powered by Digital India Initiative | AI Saathi</p>
+  </footer>
+
+  <div class="ai-badge">🤖 AI Saathi Active</div>
+  <script src="lang-toggle.js"></script>
+  <script src="chatbot.js"></script>
+</body>
+</html>

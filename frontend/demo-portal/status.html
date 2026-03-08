@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="hi">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>स्थिति जांचें | Check Status</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <div class="top-bar">🇮🇳 भारत सरकार | Government of India 🇮🇳</div>
+
+  <header class="header">
+    <div class="header-left">
+      <div class="emblem">🇮🇳</div>
+      <div class="header-title">
+        <h1 data-hi="सरकारी योजना पोर्टल" data-en="Government Schemes Portal">सरकारी योजना पोर्टल</h1>
+        <p>Government Schemes Portal - Digital India</p>
+      </div>
+    </div>
+    <div style="display:flex;gap:10px;align-items:center;">
+      <button class="lang-toggle" onclick="toggleLanguage()" style="background:white;color:#1e3a8a;padding:8px 15px;border:2px solid white;border-radius:20px;cursor:pointer;font-weight:600;font-size:13px;">🌐 English</button>
+      <button class="btn-login" onclick="location.href='login.html'" data-hi="लॉगिन | Login" data-en="Login">लॉगिन | Login</button>
+    </div>
+  </header>
+
+  <nav class="nav">
+    <a href="index.html" data-hi="🏠 होम" data-en="🏠 Home">🏠 होम</a>
+    <a href="schemes.html" data-hi="📋 योजनाएं" data-en="📋 Schemes">📋 योजनाएं</a>
+    <a href="apply.html" data-hi="📝 आवेदन करें" data-en="📝 Apply">📝 आवेदन करें</a>
+    <a href="status.html" class="active" data-hi="🔍 स्थिति जांचें" data-en="🔍 Check Status">🔍 स्थिति जांचें</a>
+    <a href="contact.html" data-hi="📞 संपर्क" data-en="📞 Contact">📞 संपर्क</a>
+    <a href="about.html" data-hi="ℹ️ हमारे बारे में" data-en="ℹ️ About">ℹ️ हमारे बारे में</a>
+  </nav>
+
+  <div class="container" style="margin-top:60px; margin-bottom:60px;">
+    <div class="form-container">
+      <h2 style="text-align:center; color:#1e3a8a; margin-bottom:10px;" data-hi="🔍 आवेदन स्थिति जांचें" data-en="🔍 Check Your Application Status">🔍 आवेदन स्थिति जांचें</h2>
+      <p style="text-align:center; color:#666; margin-bottom:30px;">Check Your Application Status</p>
+      
+      <form onsubmit="handleStatus(event)">
+        <div class="form-group">
+          <label data-hi="आवेदन संख्या / Application Number *" data-en="Application Number *">आवेदन संख्या / Application Number *</label>
+          <input type="text" placeholder="APP123456" required>
+        </div>
+
+        <div class="form-group">
+          <label data-hi="आधार नंबर / Aadhaar Number *" data-en="Aadhaar Number *">आधार नंबर / Aadhaar Number *</label>
+          <input type="text" placeholder="1234 5678 9012" maxlength="12" required>
+        </div>
+
+        <div class="form-group">
+          <button type="submit" class="btn" style="margin-top:10px;" data-hi="स्थिति जांचें | Check Status" data-en="Check Status">स्थिति जांचें | Check Status</button>
+        </div>
+      </form>
+
+      <div id="status-result" style="display:none; margin-top:30px; padding:25px; background:#f0fdf4; border-left:5px solid #10b981; border-radius:10px;">
+        <h3 style="color:#059669; margin-bottom:15px;" data-hi="✅ आवेदन स्थिति | Application Status" data-en="✅ Application Status">✅ आवेदन स्थिति | Application Status</h3>
+        <p style="margin:8px 0;"><strong data-hi="आवेदन संख्या:" data-en="Application Number:">आवेदन संख्या:</strong> <span id="app-num"></span></p>
+        <p style="margin:8px 0;"><strong data-hi="योजना:" data-en="Scheme:">योजना:</strong> <span data-hi="प्रधानमंत्री आवास योजना" data-en="PM Housing Scheme">प्रधानमंत्री आवास योजना</span></p>
+        <p style="margin:8px 0;"><strong data-hi="स्थिति:" data-en="Status:">स्थिति:</strong> <span style="color:#059669; font-weight:700;" data-hi="स्वीकृत | Approved" data-en="Approved">स्वीकृत | Approved</span></p>
+        <p style="margin:8px 0;"><strong data-hi="आवेदन तिथि:" data-en="Application Date:">आवेदन तिथि:</strong> <span data-hi="15 फरवरी 2026" data-en="15 February 2026">15 फरवरी 2026</span></p>
+        <p style="margin:8px 0;"><strong data-hi="अनुमोदन तिथि:" data-en="Approval Date:">अनुमोदन तिथि:</strong> <span data-hi="28 फरवरी 2026" data-en="28 February 2026">28 फरवरी 2026</span></p>
+      </div>
+    </div>
+  </div>
+
+  <footer class="footer">
+    <p>© 2026 भारत सरकार | Government of India</p>
+    <p>Powered by Digital India Initiative | AI Saathi</p>
+  </footer>
+
+  <div class="ai-badge">🤖 AI Saathi Active</div>
+  <script src="lang-toggle.js"></script>
+  <script src="chatbot.js"></script>
+  <script>
+    function handleStatus(e) {
+      e.preventDefault();
+      const appNum = e.target[0].value;
+      document.getElementById('app-num').textContent = appNum;
+      document.getElementById('status-result').style.display = 'block';
+    }
+  </script>
+</body>
+</html>

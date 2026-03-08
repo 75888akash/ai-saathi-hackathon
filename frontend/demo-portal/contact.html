@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="hi">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>संपर्क करें | Contact Us</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <div class="top-bar">🇮🇳 भारत सरकार | Government of India 🇮🇳</div>
+
+  <header class="header">
+    <div class="header-left">
+      <div class="emblem">🇮🇳</div>
+      <div class="header-title">
+        <h1 data-hi="सरकारी योजना पोर्टल" data-en="Government Schemes Portal">सरकारी योजना पोर्टल</h1>
+        <p>Government Schemes Portal - Digital India</p>
+      </div>
+    </div>
+    <div style="display:flex;gap:10px;align-items:center;">
+      <button class="lang-toggle" onclick="toggleLanguage()" style="background:white;color:#1e3a8a;padding:8px 15px;border:2px solid white;border-radius:20px;cursor:pointer;font-weight:600;font-size:13px;">🌐 English</button>
+      <button class="btn-login" onclick="location.href='login.html'" data-hi="लॉगिन | Login" data-en="Login">लॉगिन | Login</button>
+    </div>
+  </header>
+
+  <nav class="nav">
+    <a href="index.html" data-hi="🏠 होम" data-en="🏠 Home">🏠 होम</a>
+    <a href="schemes.html" data-hi="📋 योजनाएं" data-en="📋 Schemes">📋 योजनाएं</a>
+    <a href="apply.html" data-hi="📝 आवेदन करें" data-en="📝 Apply">📝 आवेदन करें</a>
+    <a href="status.html" data-hi="🔍 स्थिति जांचें" data-en="🔍 Check Status">🔍 स्थिति जांचें</a>
+    <a href="contact.html" class="active" data-hi="📞 संपर्क" data-en="📞 Contact">📞 संपर्क</a>
+    <a href="about.html" data-hi="ℹ️ हमारे बारे में" data-en="ℹ️ About">ℹ️ हमारे बारे में</a>
+  </nav>
+
+  <div class="container" style="margin-top:50px; margin-bottom:50px;">
+    <h2 class="section-title" data-hi="📞 हमसे संपर्क करें" data-en="📞 Contact Us">📞 हमसे संपर्क करें</h2>
+
+    <div style="display:grid; grid-template-columns:repeat(auto-fit, minmax(300px, 1fr)); gap:30px; margin-bottom:50px;">
+      <div style="background:white; padding:30px; border-radius:15px; box-shadow:0 4px 15px rgba(0,0,0,0.1); text-align:center;">
+        <div style="font-size:50px; margin-bottom:15px;">📞</div>
+        <h3 style="color:#1e3a8a; margin-bottom:10px;" data-hi="हेल्पलाइन नंबर" data-en="Helpline Number">हेल्पलाइन नंबर</h3>
+        <p style="color:#666; font-size:20px; font-weight:700;">1800-123-4567</p>
+        <p style="color:#666; font-size:14px; margin-top:5px;" data-hi="सोमवार - शनिवार (9 AM - 6 PM)" data-en="Monday - Saturday (9 AM - 6 PM)">सोमवार - शनिवार (9 AM - 6 PM)</p>
+      </div>
+
+      <div style="background:white; padding:30px; border-radius:15px; box-shadow:0 4px 15px rgba(0,0,0,0.1); text-align:center;">
+        <div style="font-size:50px; margin-bottom:15px;">✉️</div>
+        <h3 style="color:#1e3a8a; margin-bottom:10px;" data-hi="ईमेल" data-en="Email">ईमेल</h3>
+        <p style="color:#666; font-size:16px; font-weight:600;">support@govschemes.in</p>
+        <p style="color:#666; font-size:14px; margin-top:5px;" data-hi="24 घंटे में जवाब" data-en="Response within 24 hours">24 घंटे में जवाब</p>
+      </div>
+
+      <div style="background:white; padding:30px; border-radius:15px; box-shadow:0 4px 15px rgba(0,0,0,0.1); text-align:center;">
+        <div style="font-size:50px; margin-bottom:15px;">📍</div>
+        <h3 style="color:#1e3a8a; margin-bottom:10px;" data-hi="पता" data-en="Address">पता</h3>
+        <p style="color:#666; font-size:14px;" data-hi="भारत सरकार<br>नई दिल्ली - 110001" data-en="Government of India<br>New Delhi - 110001">भारत सरकार<br>नई दिल्ली - 110001</p>
+      </div>
+    </div>
+
+    <div class="form-container">
+      <h2 style="text-align:center; color:#1e3a8a; margin-bottom:10px;" data-hi="💬 संदेश भेजें" data-en="💬 Send us a message">💬 संदेश भेजें</h2>
+      <p style="text-align:center; color:#666; margin-bottom:30px;">Send us a message</p>
+      
+      <form onsubmit="handleContact(event)">
+        <div class="form-group">
+          <label data-hi="नाम / Name *" data-en="Name *">नाम / Name *</label>
+          <input type="text" placeholder="अपना नाम लिखें" required>
+        </div>
+
+        <div class="form-group">
+          <label data-hi="ईमेल / Email *" data-en="Email *">ईमेल / Email *</label>
+          <input type="email" placeholder="example@email.com" required>
+        </div>
+
+        <div class="form-group">
+          <label data-hi="मोबाइल नंबर / Mobile Number *" data-en="Mobile Number *">मोबाइल नंबर / Mobile Number *</label>
+          <input type="tel" placeholder="+91 98765 43210" maxlength="10" required>
+        </div>
+
+        <div class="form-group">
+          <label data-hi="विषय / Subject *" data-en="Subject *">विषय / Subject *</label>
+          <input type="text" placeholder="संदेश का विषय" required>
+        </div>
+
+        <div class="form-group">
+          <label data-hi="संदेश / Message *" data-en="Message *">संदेश / Message *</label>
+          <textarea rows="5" placeholder="अपना संदेश यहाँ लिखें..." required></textarea>
+        </div>
+
+        <div class="form-group">
+          <button type="submit" class="btn" style="margin-top:10px;" data-hi="संदेश भेजें | Send Message" data-en="Send Message">संदेश भेजें | Send Message</button>
+        </div>
+      </form>
+    </div>
+  </div>
+
+  <footer class="footer">
+    <p>© 2026 भारत सरकार | Government of India</p>
+    <p>Powered by Digital India Initiative | AI Saathi</p>
+  </footer>
+
+  <div class="ai-badge">🤖 AI Saathi Active</div>
+  <script src="lang-toggle.js"></script>
+  <script src="chatbot.js"></script>
+  <script>
+    function handleContact(e) {
+      e.preventDefault();
+      alert('आपका संदेश सफलतापूर्वक भेज दिया गया है!\nYour message has been sent successfully!\n\nहम जल्द ही आपसे संपर्क करेंगे।');
+      e.target.reset();
+    }
+  </script>
+</body>
+</html>
